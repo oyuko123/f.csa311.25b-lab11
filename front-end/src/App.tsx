@@ -34,7 +34,7 @@ class App extends React.Component<Props, GameState> {
     /**
      * state has type GameState as specified in the class inheritance.
      */
-    this.state = { cells: [] }
+    this.state = { cells: [], message: "" }
   }
 
   /**
@@ -45,7 +45,7 @@ class App extends React.Component<Props, GameState> {
   newGame = async () => {
     const response = await fetch('/newgame');
     const json = await response.json();
-    this.setState({ cells: json['cells'] });
+    this.setState({ cells: json['cells'], message: json['message'] });
   }
 
   /**
@@ -61,7 +61,7 @@ class App extends React.Component<Props, GameState> {
       e.preventDefault();
       const response = await fetch(`/play?x=${x}&y=${y}`)
       const json = await response.json();
-      this.setState({ cells: json['cells'] });
+      this.setState({ cells: json['cells'], message: json['message'] });
     }
   }
 
@@ -121,11 +121,19 @@ class App extends React.Component<Props, GameState> {
         <div id="bottombar">
           <button onClick={/* get the function, not call the function */this.newGame}>New Game</button>
           {/* Exercise: implement Undo function */}
-          <button>Undo</button>
-        </div>
+          <button onClick={this.undo}>Undo</button>
+          </div>
+        <div id="instructions">{this.state.message}</div>
+
       </div>
     );
   }
+  undo = async () => {
+    const response = await fetch('/undo');
+    const json = await response.json();
+    this.setState({ cells: json['cells'], message: json['message'] });
+  }
+  
 }
 
 export default App;

@@ -19,12 +19,14 @@
 }
 
 #instructions {
-  height: 5vh;
-  background-color: white;
-  padding: 0px;
-  margin: 0px;
-  text-align: center;
-  border: 1px solid black;
+  font-size: 2vw;
+  font-weight: bold;
+  color: #444;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #bottombar button {
@@ -45,3 +47,7 @@ body {
 }
 
 .playable { background-color: red;}
+.cell.playable:hover {
+  background-color: #ff9999;
+  cursor: pointer;
+}
